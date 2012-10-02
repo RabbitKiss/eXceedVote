@@ -29,7 +29,7 @@ public class loginUI extends JFrame implements ActionListener{
 	private JTextField usernameTextField;
 	private JTextField passwordField;
 	private JPanel loginPanel;
-//	private Controller controller;
+	private Controller controller;
 
 	/**
 	 * Launch the application.
@@ -51,7 +51,7 @@ public class loginUI extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public loginUI() {
-//		controller = new Controller();
+		controller = new Controller();
 		setTitle("eXceedVote");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -132,11 +132,12 @@ public class loginUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//////////////////IMPLEMENT LOGIN  //////////////////////
-		//if(Controller.longin( id, pass))
-			voteUI frame = new voteUI(/*Controller*/);
+		if(controller.login( usernameTextField.getText(), passwordField.getText())){
+			voteUI frame = new voteUI(controller);
 			this.setVisible(false);
 			dispose();
 			frame.setVisible(true);
+		}
 		
 	}
 }
