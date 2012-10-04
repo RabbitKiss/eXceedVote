@@ -6,17 +6,17 @@ import org.apache.log4j.Level;
 public class Login
 {
 	private static Logger log = Logger.getLogger( Login.class );
-    private static String id;
+    static String id=null;
 
     /**
-     * Constructor for objects of class Login
+     * Null constructor
      */
     public Login()
     {
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * login method use by controller 
      * 
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
@@ -45,9 +45,16 @@ public class Login
      */
     public boolean verify(String id , String password)
     {		
-    		
-            Login.id = id;
-            log.fatal("ID : " + id );
-            return true;
+    		if(password!=null && id!=null&&password!=" " && id!=" ")
+    		{
+    			Login.id = id;
+    			log.fatal("ID : " + id );
+    		return true;
+    		}
+    		else
+    		{
+    			log.fatal("ID : " + id + " : invalid input password" );
+    		return false;
+    		}
     }
 }

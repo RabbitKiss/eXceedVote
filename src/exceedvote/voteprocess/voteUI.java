@@ -32,7 +32,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.JComboBox;
-
+/**
+ * User Interface of voting process
+ * 
+ * @author Akarawit
+ *
+ */
 public class voteUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -55,7 +60,10 @@ public class voteUI extends JFrame implements ActionListener {
 		this.pack();
 
 	}
-
+	
+	/**
+	 * initial UI component
+	 */
 	private void initComponent() {
 
 		setTitle("eXceedVote");
@@ -136,7 +144,10 @@ public class voteUI extends JFrame implements ActionListener {
 		}
 
 	}
-
+	
+	/**
+	 * actionPerformed for submit button
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		List<String> question = controller.getInstruction();
@@ -174,34 +185,34 @@ public class voteUI extends JFrame implements ActionListener {
 	}
 
 }
-
-class HintTextField extends JTextField implements FocusListener {
-
-	private final String hint;
-
-	public HintTextField(final String hint) {
-		super(hint);
-		this.hint = hint;
-		super.addFocusListener(this);
-	}
-
-	@Override
-	public void focusGained(FocusEvent e) {
-		if (this.getText().isEmpty()) {
-			super.setText("");
-		}
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) {
-		if (this.getText().isEmpty()) {
-			super.setText(hint);
-		}
-	}
-
-	@Override
-	public String getText() {
-		String typed = super.getText();
-		return typed.equals(hint) ? "" : typed;
-	}
-}
+//
+//class HintTextField extends JTextField implements FocusListener {
+//
+//	private final String hint;
+//
+//	public HintTextField(final String hint) {
+//		super(hint);
+//		this.hint = hint;
+//		super.addFocusListener(this);
+//	}
+//
+//	@Override
+//	public void focusGained(FocusEvent e) {
+//		if (this.getText().isEmpty()) {
+//			super.setText("");
+//		}
+//	}
+//
+//	@Override
+//	public void focusLost(FocusEvent e) {
+//		if (this.getText().isEmpty()) {
+//			super.setText(hint);
+//		}
+//	}
+//
+//	@Override
+//	public String getText() {
+//		String typed = super.getText();
+//		return typed.equals(hint) ? "" : typed;
+//	}
+//}

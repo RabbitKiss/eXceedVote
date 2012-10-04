@@ -8,15 +8,16 @@ import org.apache.log4j.Level;
  * Point board like a semi database
  * 
  * @author Tachin
- * @version 1.0.0.0.0.0.0.0.0.0.0.0.0.0.1a
  */
-
-
 public class ScoreBoard
 { 
 	private static Logger log = Logger.getLogger( ScoreBoard.class );
     private static ScoreBoard instance = null;
     
+    /**
+     *  
+     * @return ScoreBoard
+     */
     public static ScoreBoard getInstance() 
     {
         if (instance == null) 
@@ -27,16 +28,30 @@ public class ScoreBoard
         return instance;
     }
     
+    /**
+     * private Constructor to make singleton 
+     */
     private ScoreBoard()
     {
     }
     
+    /**
+     * getScore
+     * @param questionIndex
+     * @return List<Integer>
+     */
     public List<Integer> getScore(int questionIndex)
     {
         List<Integer> sc = new ArrayList<Integer>();
         return sc;
     }
     
+    
+    /**
+     * addScore
+     * @param questionIndex
+     * @param point
+     */
     public void addScore(int questionIndex,List<Integer> point)
     {
         //log4j add
@@ -46,14 +61,5 @@ public class ScoreBoard
     		sb.append(point.get(i)+" ");
     	}
     	log.fatal(sb);
-    	
-//    	Iterator<Integer> myListIterator = point.iterator(); 
-//    	while (myListIterator.hasNext())
-//    	{
-//    		Integer coord = myListIterator.next();
-//    		log.fatal(questionIndex+");
-//    		
-//    	}
-    	
     }
 }

@@ -129,6 +129,10 @@ public class loginUI extends JFrame implements ActionListener{
 		contentPane.setLayout(gl_contentPane);
 	}
 
+
+	/**
+	 * actionPerformed for login button
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//////////////////IMPLEMENT LOGIN  //////////////////////

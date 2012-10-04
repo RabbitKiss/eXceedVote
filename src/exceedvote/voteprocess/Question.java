@@ -1,8 +1,9 @@
 package exceedvote.voteprocess;
 import java.util.List;
+
 /**
- *
- * @author Teddy
+ * Interface of question
+ * @author Vanich
  */
 public interface Question {
     public String getInstruction();
