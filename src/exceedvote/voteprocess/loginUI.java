@@ -137,7 +137,7 @@ public class loginUI extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//////////////////IMPLEMENT LOGIN  //////////////////////
 		if(controller.login( usernameTextField.getText(), passwordField.getText())){
-			voteUI frame = new voteUI(controller);
+			VoteUI frame = new VoteUI(controller);
 			this.setVisible(false);
 			dispose();
 			frame.setVisible(true);

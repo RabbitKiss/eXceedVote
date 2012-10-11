@@ -46,7 +46,7 @@ public class Controller {
 	 * @param questionIndex as the index of question.
 	 * @return Type of question.
 	 */
-	public String getQuestionType(int questionIndex){ return voteChart.getQuestionType(questionIndex); }
+	public Class getQuestionType(int questionIndex){ return voteChart.getQuestionType(questionIndex); }
 	
 	/**
 	 * Method that return the list of integer of the old point of each question.

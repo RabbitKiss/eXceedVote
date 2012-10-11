@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class VoteChart {
-	List<Question> questions;
+	private List<Question> questions;
 	
 	/** constructor 
 	 *	create the (temporary) questions.
@@ -46,7 +46,7 @@ public class VoteChart {
 	}
 	
 	/**
-	 * Method that return the size of list of Question object. 
+	 * Method that return the number of questions in VoteChart.
 	 * @return Size of list.
 	 */
 	public int size(){ return questions.size(); }
@@ -67,8 +67,8 @@ public class VoteChart {
 	 * @param questionIndex as the index of question.
 	 * @return Type of question.
 	 */
-	public String getQuestionType(int questionIndex){
-		return questions.get(questionIndex).getClass().getName();
+	public Class getQuestionType(int questionIndex){
+		return questions.get(questionIndex).getClass();
 	}
 	
 	/**
