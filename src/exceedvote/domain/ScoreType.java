@@ -1,4 +1,4 @@
-package exceedvote.voteprocess;
+package exceedvote.domain;
 import java.util.List;
 
 /*

@@ -1,11 +1,11 @@
-package exceedvote.voteprocess;
+package exceedvote.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class is used to receive the information of question.
- * Than, form the information, and send to the Controller class.
+ * Then, form the information, and send to the Controller class.
  * @author Jaktip Yordsri
  * 
  */

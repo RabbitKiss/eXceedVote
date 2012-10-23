@@ -1,8 +1,10 @@
-package exceedvote.voteprocess;
+package exceedvote.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import exceedvote.domain.BallotType;
 
 public class BallotTypeTest {
 

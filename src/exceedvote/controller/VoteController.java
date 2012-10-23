@@ -1,21 +1,26 @@
-package exceedvote.voteprocess;
+package exceedvote.controller;
 
 import java.util.List;
 
 import javax.security.sasl.AuthorizeCallback;
+
+import exceedvote.domain.Login;
+import exceedvote.domain.ScoreBoard;
+import exceedvote.domain.TeamBoard;
+import exceedvote.domain.VoteChart;
 /**
  * This class is used to be like a medium between logical part and representative part.
  * @author Jaktip Yordsri
  * 
  */
-public class Controller {
+public class VoteController {
 	private VoteChart voteChart;
 	private TeamBoard teamBoard;
 	private Login login;
 	private ScoreBoard scoreBoard;
 	
 	/** Constructor **/
-	public Controller(){
+	public VoteController(){
 		voteChart = new VoteChart();
 		login = new Login();
 		teamBoard = new TeamBoard();

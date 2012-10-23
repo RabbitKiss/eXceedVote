@@ -1,5 +1,6 @@
-package exceedvote.voteprocess;
-import exceedvote.voteprocess.ScoreType;
+package exceedvote.test;
+import exceedvote.domain.ScoreType;
+
 import java.util.List;
 import org.junit.*;
 import static org.junit.Assert.*;

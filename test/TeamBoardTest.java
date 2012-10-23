@@ -1,4 +1,4 @@
-package exceedvote.voteprocess;
+package exceedvote.test;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import exceedvote.domain.TeamBoard;
 
 public class TeamBoardTest {
 	TeamBoard teamBoard;

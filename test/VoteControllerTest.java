@@ -1,20 +1,22 @@
-package exceedvote.voteprocess;
+package exceedvote.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import exceedvote.controller.VoteController;
 
 /**
  * This JUnit test for class Controller
  * @author Jaktip Yordsri
  * 
  */
-public class ControllerTest {
+public class VoteControllerTest {
 
-	private Controller controller;
+	private VoteController controller;
 	
-	public ControllerTest(){
-		controller = new Controller();
+	public VoteControllerTest(){
+		controller = new VoteController();
 	}
 	
 

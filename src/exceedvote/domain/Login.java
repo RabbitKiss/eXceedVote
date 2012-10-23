@@ -1,4 +1,4 @@
-package exceedvote.voteprocess;
+package exceedvote.domain;
 import java.io.Console;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Level;
@@ -6,7 +6,7 @@ import org.apache.log4j.Level;
 public class Login
 {
 	private static Logger log = Logger.getLogger( Login.class );
-    static String id=null;
+    public static String id=null;
 
     /**
      * Null constructor

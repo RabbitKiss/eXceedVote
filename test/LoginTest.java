@@ -1,5 +1,6 @@
-package exceedvote.voteprocess;
+package exceedvote.test;
 
+import exceedvote.domain.Login;
 import junit.framework.TestCase;
 
 public class LoginTest extends TestCase {

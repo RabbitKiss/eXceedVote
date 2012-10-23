@@ -1,4 +1,4 @@
-package exceedvote.voteprocess;
+package exceedvote.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -18,18 +18,21 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+
+import exceedvote.controller.VoteController;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class loginUI extends JFrame implements ActionListener{
+public class LoginUI extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField usernameTextField;
 	private JTextField passwordField;
 	private JPanel loginPanel;
-	private Controller controller;
+	private VoteController controller;
 
 	/**
 	 * Launch the application.
@@ -38,7 +41,7 @@ public class loginUI extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginUI frame = new loginUI();
+					LoginUI frame = new LoginUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,8 +53,8 @@ public class loginUI extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public loginUI() {
-		controller = new Controller();
+	public LoginUI() {
+		controller = new VoteController();
 		setTitle("eXceedVote");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

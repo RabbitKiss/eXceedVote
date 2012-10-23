@@ -1,4 +1,4 @@
-package exceedvote.voteprocess;
+package exceedvote.domain;
 import java.util.List;
 
 import org.apache.log4j.helpers.QuietWriter;
