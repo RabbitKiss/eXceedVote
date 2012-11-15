@@ -1,39 +1,71 @@
 package exceedvote.domain;
+
+import java.io.Serializable;
 import java.util.List;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import javax.persistence.*;
+
 
 /**
- * Score type question 
- * @author Vanich
+ * The persistent class for the question database table.
+ * 
  */
-public class ScoreType implements Question{
+@Entity
+@Table(name="question")
+public class ScoreType implements Serializable, Question {
+	private static final long serialVersionUID = 1L;
 
-    private String question;
-    private int questionIndex;
-    private ScoreBoard scoreBoard;
-    
-    /**
-     * constructor of class
-     * @param questionIndex
-     * @param question instruction
-     */
-    public ScoreType(int questionIndex,String question)
-    {
-        this.question = question;
-        this.questionIndex = questionIndex;
-        scoreBoard = ScoreBoard.getInstance();
-    }
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
-    /**
-     * constructor of class
-     * @param question instruction
-     * @param index questionIndex
-     */
-    @Override
+	private String question;
+
+	private int questionIndex;
+	
+	private String type;
+	
+	@Transient
+	private ScoreBoard scoreBoard;
+
+	public ScoreType() {
+		scoreBoard = ScoreBoard.getInstance();
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public int getQuestionIndex() {
+		return this.questionIndex;
+	}
+
+	public void setQuestionIndex(int questionIndex) {
+		this.questionIndex = questionIndex;
+	}
+	
+	public void setType(String type){
+		this.type = type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	
+	
     public String getInstruction()
     {
         return question;

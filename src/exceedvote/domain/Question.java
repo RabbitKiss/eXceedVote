@@ -5,6 +5,7 @@ import java.util.List;
  * Interface of question
  * @author Vanich
  */
+
 public interface Question {
     public String getInstruction();
     public int getPoint(int teamIndex);

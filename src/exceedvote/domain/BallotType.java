@@ -1,42 +1,71 @@
 package exceedvote.domain;
+
+import java.io.Serializable;
 import java.util.List;
 
-import org.apache.log4j.helpers.QuietWriter;
+import javax.persistence.*;
 
 
 /**
- * Ballot type question 
- * @author Vanich
+ * The persistent class for the question database table.
+ * 
  */
-public class BallotType implements Question {
-    
-    private String question;
-    private int questionIndex;
-    private ScoreBoard scoreBoard;
-    
-    /**
-     * constructor of class
-     * @param questionIndex
-     * @param question instruction
-     */
-    public BallotType(int questionIndex,String question)
-    {
-        this.question = question;
-        this.questionIndex = questionIndex;
-        scoreBoard = ScoreBoard.getInstance();
-    }
-    
-    /**
-     * constructor of class
-     * @param question instruction
-     * @param index questionIndex
-     */
-    public BallotType(String question, int index)
-    {
-        this.question = question;
-        questionIndex = index;
-    }
-    
+@Entity
+@Table(name="question")
+public class BallotType implements Serializable, Question {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+
+	private String question;
+
+	private int questionIndex;
+	
+	private String type;	
+
+//	@oneToMany	
+//	List<Choice> choice;
+	
+	@Transient
+	private ScoreBoard scoreBoard;
+	
+	public BallotType() {
+		scoreBoard = ScoreBoard.getInstance();
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public int getQuestionIndex() {
+		return this.questionIndex;
+	}
+
+	public void setQuestionIndex(int questionIndex) {
+		this.questionIndex = questionIndex;
+	}
+	
+	public void setType(String type){
+		this.type = type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
     /**
      * 
      * @return question instruction
@@ -77,5 +106,4 @@ public class BallotType implements Question {
     {
         return scoreBoard.getScore(questionIndex);
     }
-    
 }

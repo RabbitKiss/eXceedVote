@@ -1,13 +1,9 @@
 package exceedvote.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 
-import java.awt.EventQueue;
-import java.text.NumberFormat;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -17,19 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.JScrollBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.GridLayout;
 import java.util.ArrayList;
-import javax.swing.JList;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JComboBox;
 
@@ -45,7 +37,6 @@ import exceedvote.domain.ScoreType;
 public class VoteUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JScrollPane mainScrollPane;
 	private JPanel choicePanel;
 	private JPanel panel;
 	private JButton btnSubmit;
@@ -58,11 +49,10 @@ public class VoteUI extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public VoteUI(VoteController controller) {
-		setResizable(false);
+		setResizable(true);
 		this.controller = controller;
 		initComponent();
 		this.pack();
-
 	}
 	
 	/**
@@ -74,9 +64,12 @@ public class VoteUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-
-		mainScrollPane = new JScrollPane();
+		JScrollPane mainScrollPane = new JScrollPane(contentPane);
+		mainScrollPane.setPreferredSize(new Dimension(550,600));
+		setContentPane(mainScrollPane);
+		
+		
+		
 
 		panel = new JPanel();
 
@@ -84,9 +77,8 @@ public class VoteUI extends JFrame implements ActionListener {
 		btnSubmit.addActionListener(this);
 		panel.add(btnSubmit);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		contentPane.add(mainScrollPane);
 		contentPane.add(panel, BorderLayout.EAST);
-
+		
 		choicePanel = new JPanel();
 		contentPane.add(choicePanel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -146,7 +138,6 @@ public class VoteUI extends JFrame implements ActionListener {
 			}
 
 		}
-
 	}
 	
 	/**
@@ -184,5 +175,8 @@ public class VoteUI extends JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(null, "Record Complete!");
 
 	}
+	
+	
+	
 
 }

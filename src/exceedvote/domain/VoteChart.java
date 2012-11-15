@@ -3,6 +3,10 @@ package exceedvote.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceedvote.dao.DaoFactory;
+import exceedvote.dao.DAO;
+
+
 /**
  * This class is used to receive the information of question.
  * Then, form the information, and send to the Controller class.
@@ -11,38 +15,48 @@ import java.util.List;
  */
 
 public class VoteChart {
+	
 	private List<Question> questions;
+	// add
+	private DAO questionDAO;
+	
 	
 	/** constructor 
 	 *	create the (temporary) questions.
 	 */	
 	public VoteChart(){
-		String instructionQuestion;
-		questions = new ArrayList<Question>();
+//		String instructionQuestion;		
+		questionDAO = DaoFactory.getInstance().getDAO();
+		questions = questionDAO.find();
 		
-		instructionQuestion = "Which team is the best technical team?";
-		Question q = new BallotType(1,instructionQuestion);
-		questions.add(q);
+//		questionDAO = QuestionDAO.getInstance();
+//		questions = new ArrayList<Question>();
+//		questions = questionDAO.getQuestion();
 		
-		instructionQuestion = "Which team is the best in coding?";
-		q = new BallotType(2,instructionQuestion);
-		questions.add(q);
-		
-		instructionQuestion = "Which team has the best user inteface?";
-		q = new BallotType(3,instructionQuestion);
-		questions.add(q);
-		
-		instructionQuestion = "Presentation score";
-		q = new ScoreType(4,instructionQuestion);
-		questions.add(q);
-		
-		instructionQuestion = "Beautifull user interface";
-		q = new ScoreType(5,instructionQuestion);
-		questions.add(q);
-		
-		instructionQuestion = "Team work";
-		q = new ScoreType(6,instructionQuestion);
-		questions.add(q);
+//		questions = questionDAO.getQuestion();
+//		instructionQuestion = "Which team is the best technical team?";
+//		Question q = new BallotType(1,instructionQuestion);
+//		questions.add(q);
+//		
+//		instructionQuestion = "Which team is the best in coding?";
+//		q = new BallotType(2,instructionQuestion);
+//		questions.add(q);
+//		
+//		instructionQuestion = "Which team has the best user inteface?";
+//		q = new BallotType(3,instructionQuestion);
+//		questions.add(q);
+//		
+//		instructionQuestion = "Presentation score";
+//		q = new ScoreType(4,instructionQuestion);
+//		questions.add(q);
+//		
+//		instructionQuestion = "Beautifull user interface";
+//		q = new ScoreType(5,instructionQuestion);
+//		questions.add(q);
+//		
+//		instructionQuestion = "Team work";
+//		q = new ScoreType(6,instructionQuestion);
+//		questions.add(q);
 	}
 	
 	/**

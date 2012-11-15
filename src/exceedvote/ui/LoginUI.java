@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -86,7 +87,7 @@ public class LoginUI extends JFrame implements ActionListener{
 		usernameTextField = new JTextField();
 		usernameTextField.setColumns(10);
 		
-		JLabel lblPasswrd = new JLabel("Passwrd :");
+		JLabel lblPasswrd = new JLabel("Password :");
 		lblPasswrd.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		passwordField = new JPasswordField();
@@ -138,12 +139,15 @@ public class LoginUI extends JFrame implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//////////////////IMPLEMENT LOGIN  //////////////////////
 		if(controller.login( usernameTextField.getText(), passwordField.getText())){
 			VoteUI frame = new VoteUI(controller);
 			this.setVisible(false);
 			dispose();
 			frame.setVisible(true);
+		}
+		// add
+		else{
+			JOptionPane.showMessageDialog(contentPane,"login failed");
 		}
 		
 	}
