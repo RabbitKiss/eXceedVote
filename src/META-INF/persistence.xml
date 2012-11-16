@@ -9,6 +9,9 @@
 		<class>exceedvote.domain.ScoreType</class>
 		<class>exceedvote.domain.Choice</class>
 		<class>exceedvote.domain.User</class>
+		<class>test.Question</class>
+		<class>test.ChoiceQuestion</class>
+		<class>exceedvote.domain.Score</class>
 	<properties> 
        <property name="javax.persistence.jdbc.url" 
                  value="jdbc:mysql://localhost:3306/exceedvote"/> 

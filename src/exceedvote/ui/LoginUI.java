@@ -92,6 +92,8 @@ public class LoginUI extends JFrame implements ActionListener{
 		
 		passwordField = new JPasswordField();
 		passwordField.setColumns(10);
+		//add
+		passwordField.addActionListener(this);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(this);

@@ -5,8 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public abstract class DaoFactory {
-	private static DaoFactory df;
-	public static ConcreteQuestionDAO concreteQuestionDAO;
+	public static DaoFactory df;
 	private EntityManagerFactory factory;
 	protected EntityManager em;
 	
@@ -21,5 +20,5 @@ public abstract class DaoFactory {
 		return df;
 	}
 	
-	public abstract DAO getDAO();
+	public abstract  DAO createDAO(String type);
 }

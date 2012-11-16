@@ -44,20 +44,33 @@ public class ConcreteChoiceDAO implements DAO{
 	public void save(Object o) {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist((Choice)o);
+		em.persist((Question)o);
 		tx.commit();
 	}
 
 	@Override
-	public Choice getChoice() {
-		 Query query = em.createQuery("SELECT t from Choice c ");
-		 List<Choice> choice = query.getResultList();
-		 return choice.get(0);
+	public void update(Object o) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
+	public void delete(Object o) {
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	public Choice getChoice() {
+//		 Query query = em.createQuery("SELECT t from Choice c ");
+//		 List<Choice> choice = query.getResultList();
+//		 return choice.get(0);
+		return null;
+	}
+
 	public List<Question> find() {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+
+
 }

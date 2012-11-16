@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
+import exceedvote.dao.DaoFactory;
+
 /**
  * Point board like a semi database
  * 
@@ -12,6 +14,8 @@ public class ScoreBoard
 { 
 	private static Logger log = Logger.getLogger( ScoreBoard.class );
     private static ScoreBoard instance = null;
+    //add
+    
     
     /**
      *  
@@ -61,4 +65,10 @@ public class ScoreBoard
     	}
     	log.fatal(sb);
     }
+    
+    //add
+//    public void update(int questionIndex,List<Integer> point){
+//    	DaoFactory.getInstance().createDAO("scoreDAO").update(o);
+//    }
+    
 }

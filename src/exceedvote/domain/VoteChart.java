@@ -3,6 +3,10 @@ package exceedvote.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import exceedvote.dao.ConcreteQuestionDAO;
+import exceedvote.dao.ConcreteScoreDAO;
 import exceedvote.dao.DaoFactory;
 import exceedvote.dao.DAO;
 
@@ -18,16 +22,24 @@ public class VoteChart {
 	
 	private List<Question> questions;
 	// add
-	private DAO questionDAO;
+	private ConcreteQuestionDAO questionDAO;
+	//add
+	private List<Score> scores;
+	//add
+	private ConcreteScoreDAO scoreDAO;
 	
-	
+	//adjust constructor arguments
 	/** constructor 
 	 *	create the (temporary) questions.
 	 */	
-	public VoteChart(){
+	public VoteChart(int userId){
 //		String instructionQuestion;		
-		questionDAO = DaoFactory.getInstance().getDAO();
+		//JOptionPane.showInputDialog("...", userId);
+		questionDAO = (ConcreteQuestionDAO) (DaoFactory.getInstance().createDAO("questionDAO"));
+		scoreDAO = (ConcreteScoreDAO) DaoFactory.getInstance().createDAO("scoreDAO");
+		
 		questions = questionDAO.find();
+		scores = scoreDAO.find(userId);			
 		
 //		questionDAO = QuestionDAO.getInstance();
 //		questions = new ArrayList<Question>();
@@ -91,15 +103,23 @@ public class VoteChart {
 	 * @param point as the list of point of this question.
 	 */
 	public void vote(int questionIndex, List<Integer> point){
+		scores.get(questionIndex).setScorePoint(point);
+		scoreDAO.update(scores.get(questionIndex));
 		questions.get(questionIndex).vote(questionIndex,point);		
 	}
 	
+	//adjust the return
 	/**
 	 * Method that return the list of integer of the old point of each question.
 	 * @param questionIndex as the index of question.
 	 * @return List of the old choice of this question.
 	 */
 	public List<Integer> getChoice(int questionIndex){
-		return questions.get(questionIndex).getChoice(questionIndex);
+//		List<Integer> tmp = scores.get(questionIndex).getScorePoint();
+//		for(int i : tmp)
+//			System.out.print(i+" ");
+//		System.out.println(" ");
+		return scores.get(questionIndex).getScorePoint();
+	//	return questions.get(questionIndex).getChoice(questionIndex);
 	}
 }

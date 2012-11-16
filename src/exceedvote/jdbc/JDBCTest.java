@@ -16,8 +16,6 @@ public class JDBCTest {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/exceedvote?"
               + "user=root&password=Whiterabbit");
 			sta = con.createStatement();
-			System.out.print("select * from user where user_id = \'"+id+"\' and user_password =\'"+password+"\'");
-			//rs = sta.executeQuery("select * from question where user_id = \'"+id+"\' and user_password =\'"+password+"\'");
 			rs = sta.executeQuery("select * from user where user_id = \'"+id+"\' and user_password =\'"+password+"\'");
 			if(rs.next())
 				return true;

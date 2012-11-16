@@ -7,6 +7,7 @@ import javax.security.sasl.AuthorizeCallback;
 import exceedvote.domain.Login;
 import exceedvote.domain.ScoreBoard;
 import exceedvote.domain.TeamBoard;
+import exceedvote.domain.User;
 import exceedvote.domain.VoteChart;
 /**
  * This class is used to be like a medium between logical part and representative part.
@@ -18,10 +19,12 @@ public class VoteController {
 	private TeamBoard teamBoard;
 	private Login login;
 	private ScoreBoard scoreBoard;
+	//add
+	private User user;
 	
+	//adjust the creating of voteChart to login method, after verification success.
 	/** Constructor **/
 	public VoteController(){
-		voteChart = new VoteChart();
 		login = new Login();
 		teamBoard = new TeamBoard();
 		scoreBoard = ScoreBoard.getInstance();
@@ -32,7 +35,14 @@ public class VoteController {
 	 * @param password as the password of voter.
 	 * @return true, if the authorization of voter is available, false if not.
 	 */
-	public boolean login(String id, String password){  return login.verify(id,password); }
+	public boolean login(String id, String password){
+		user = login.verify(id,password);
+		if(user==null)
+			return false;
+		//creating voteChart here.
+		voteChart = new VoteChart(user.getId());
+		return true;
+	}
 	
 	/**
 	 * Method used to get the name of each team.

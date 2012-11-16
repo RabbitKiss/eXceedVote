@@ -25,9 +25,6 @@ public class BallotType implements Serializable, Question {
 	
 	private String type;	
 
-//	@oneToMany	
-//	List<Choice> choice;
-	
 	@Transient
 	private ScoreBoard scoreBoard;
 	
