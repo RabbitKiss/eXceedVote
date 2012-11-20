@@ -6,9 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import org.apache.derby.iapi.store.raw.Transaction;
 
-import exceedvote.domain.Choice;
 import exceedvote.domain.Question;
 import exceedvote.domain.User;
 
@@ -28,12 +26,9 @@ public class ConcreteUserDAO implements DAO{
 //	}
 	@Override
 	public void save(Object o) {
-		// TODO Auto-generated method stub
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
+		em.getTransaction().begin();
 		em.persist((User)o);
-		tx.commit();
-		//DaoFactory.getInstance().createDAO("loginDAO").save(o);
+		em.getTransaction().commit();
 	}
 
 	@Override
@@ -44,12 +39,20 @@ public class ConcreteUserDAO implements DAO{
 
 	@Override
 	public void delete(Object o) {
-		// TODO Auto-generated method stub
-		
+		User user = (User)o;
+		User tmp = em.find(User.class,user.getId());
+		em.getTransaction().begin();
+		em.remove(tmp);
+		em.getTransaction().commit();				
 	}
 
-	public User find(String id,String password){
-		
+	public List<User> findAll(){
+		Query query = em.createQuery("SELECT q FROM User q");
+		List<User> users = query.getResultList();
+		return users;
+	}
+	
+	public User find(String id,String password){		
 		Query query = em.createQuery("select u from User u where u.userId = :id and u.userPassword = :password");		
 		query.setParameter("id", id);
 		query.setParameter("password", password);		

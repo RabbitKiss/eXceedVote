@@ -10,7 +10,6 @@ import exceedvote.dao.ConcreteScoreDAO;
 import exceedvote.dao.DaoFactory;
 import exceedvote.dao.DAO;
 
-
 /**
  * This class is used to receive the information of question.
  * Then, form the information, and send to the Controller class.
@@ -26,7 +25,9 @@ public class VoteChart {
 	//add
 	private List<Score> scores;
 	//add
-	private ConcreteScoreDAO scoreDAO;
+//	private ConcreteScoreDAO scoreDAO;
+	
+	private ScoreBoard scoreBoard;
 	
 	//adjust constructor arguments
 	/** constructor 
@@ -35,15 +36,18 @@ public class VoteChart {
 	public VoteChart(int userId){
 //		String instructionQuestion;		
 		//JOptionPane.showInputDialog("...", userId);
-		questionDAO = (ConcreteQuestionDAO) (DaoFactory.getInstance().createDAO("questionDAO"));
-		scoreDAO = (ConcreteScoreDAO) DaoFactory.getInstance().createDAO("scoreDAO");
+		scoreBoard = ScoreBoard.getInstance();
 		
-		questions = questionDAO.find();
-		scores = scoreDAO.find(userId);			
+		
+		questionDAO = (ConcreteQuestionDAO) (DaoFactory.getInstance().createDAO("questionDAO"));
+//		scoreDAO = (ConcreteScoreDAO) DaoFactory.getInstance().createDAO("scoreDAO");
+		System.out.println(userId);
+//		questions = scoreBoard.getQuestion();
+		scores = scoreBoard.getChoice(userId);
 		
 //		questionDAO = QuestionDAO.getInstance();
 //		questions = new ArrayList<Question>();
-//		questions = questionDAO.getQuestion();
+		questions = questionDAO.find();
 		
 //		questions = questionDAO.getQuestion();
 //		instructionQuestion = "Which team is the best technical team?";
@@ -93,8 +97,8 @@ public class VoteChart {
 	 * @param questionIndex as the index of question.
 	 * @return Type of question.
 	 */
-	public Class getQuestionType(int questionIndex){
-		return questions.get(questionIndex).getClass();
+	public String getQuestionType(int questionIndex){
+		return questions.get(questionIndex).getType();
 	}
 	
 	/**
@@ -103,9 +107,12 @@ public class VoteChart {
 	 * @param point as the list of point of this question.
 	 */
 	public void vote(int questionIndex, List<Integer> point){
+		
 		scores.get(questionIndex).setScorePoint(point);
-		scoreDAO.update(scores.get(questionIndex));
-		questions.get(questionIndex).vote(questionIndex,point);		
+		scoreBoard.vote(scores.get(questionIndex));
+		
+//		scoreDAO.update(scores.get(questionIndex));
+//		questions.get(questionIndex).vote(questionIndex,point);		
 	}
 	
 	//adjust the return

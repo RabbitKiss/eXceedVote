@@ -1,28 +1,65 @@
 package exceedvote.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+
 
 /**
- * This JUnit test for class TeamBoard.
- * @author Jaktip Yordsri
+ * The persistent class for the team database table.
  * 
  */
-public class TeamBoard {
-	private List<String> names;
-	
-	/** constuctor */
-	public TeamBoard(){
-		names = new ArrayList<String>();		
-		names.add("Rabbit Kiss");
-		names.add("LATE");
-		names.add("Air");
-		names.add("POS");
-		names.add("JACS");
+@Entity
+@Table(name="team")
+public class TeamBoard implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+
+	private String description;
+
+	private String name;
+
+	private String picture;
+
+	public TeamBoard() {
 	}
-	/**
-	 * Method used to return all of the team's name.
-	 * @return list of team's name.
-	 */
-	public List<String> getTeamName(){ return names; }
+	
+	public TeamBoard(String name,String description) {
+		this.name = name;
+		this.description = description;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}	
 }

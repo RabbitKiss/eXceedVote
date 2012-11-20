@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface Question {
     public String getInstruction();
-    public int getPoint(int teamIndex);
-    public void vote(int question, List<Integer> point);
-    public List<Integer> getChoice(int questionIndex);
+    public String getType();
+    public void setQuestion(String question);
+    public void setType(String type);
 }

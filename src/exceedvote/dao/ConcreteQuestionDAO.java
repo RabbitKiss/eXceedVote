@@ -8,74 +8,58 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import exceedvote.domain.BallotType;
-import exceedvote.domain.Choice;
+import exceedvote.domain.BothType;
 import exceedvote.domain.Question;
+import exceedvote.domain.User;
 
 public class ConcreteQuestionDAO implements DAO{
 	
-//	public static ConcreteQuestionDAO concreteQuestionDAO;
-//	private EntityManagerFactory factory;
 	private static EntityManager em;
-//	EntityTransaction tx;//?
 
 	public ConcreteQuestionDAO(EntityManager em){
 		this.em = em;
-//		factory = Persistence.createEntityManagerFactory("exceedVote");
-//		em = factory.createEntityManager();
-//		tx = em.getTransaction();//?
-//		this.em = em;
 	}
-
-	// have to fix
-//	public static ConcreteQuestionDAO getInstance(){
-//		if(concreteQuestionDAO==null)
-//			concreteQuestionDAO = new ConcreteQuestionDAO(em);
-//		return concreteQuestionDAO;
-//	}
-	
-//	public void setEntityManager(EntityManager em){
-//		this.em  = em;
-//	}
-
-//	public List<Question> getQuestion(){
-//		 Query query = em.createQuery("SELECT t from BallotType t where t.type = 'BallotType'");
-//		 List<Question> questions = query.getResultList();
-//		 query = em.createQuery("SELECT t from ScoreType t where t.type = 'ScoreType'");
-//		 questions.addAll(query.getResultList());
-//		 return questions;
-//	}
 
 	@Override
 	public void save(Object o) {
- 
-	}
-
-	
-
-//	@Override
-//	public Choice getChoice() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist((Question)o);
+		tx.commit();
+	}	
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
-		
+		BothType bothType = (BothType)o;
+		Query query = em.createQuery("UPDATE BothType q SET q.question = :question , q.type = :type WHERE q.id = :id");
+		query.setParameter("question", bothType.getQuestion());
+		query.setParameter("type", bothType.getType());
+		query.setParameter("id", bothType.getId());		
+		em.getTransaction().begin();
+		query.executeUpdate();
+		em.getTransaction().commit();	
 	}
 
 	@Override
 	public void delete(Object o) {
-		// TODO Auto-generated method stub
-		
+		BothType bothType = (BothType)o;
+		BothType tmp = em.find(BothType.class,bothType.getId());
+		em.getTransaction().begin();
+		em.remove(tmp);
+		em.getTransaction().commit();				
 	}
 	
 	public List<Question> find() {
-		 Query query = em.createQuery("SELECT t from BallotType t where t.type = 'BallotType'");
+		 Query query = em.createQuery("SELECT t from BothType t where t.type = 'BallotType'");
 		 List<Question> questions = query.getResultList();
-		 query = em.createQuery("SELECT t from ScoreType t where t.type = 'ScoreType'");
-		 questions.addAll(query.getResultList());
+		 query = em.createQuery("SELECT t from BothType t where t.type = 'ScoreType'");
+		 questions.addAll(query.getResultList());	
 		 return questions;
+	}
+	
+	public int count(){
+		Query query = em.createQuery("SELECT count(t) FROM BothType t");
+		Number numQuestion = (Number) query.getSingleResult();
+		return numQuestion.intValue();
 	}
 }

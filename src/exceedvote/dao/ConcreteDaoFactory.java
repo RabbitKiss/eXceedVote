@@ -7,6 +7,7 @@ public class ConcreteDaoFactory extends DaoFactory{
 	private ConcreteQuestionDAO concreteQuestionDAO;
 	private ConcreteUserDAO concreteUserDAO;
 	private ConcreteScoreDAO concreteScoreDAO;
+	private ConcreteTeamDAO concreteTeamDAO;
 	
 	public ConcreteDaoFactory() {
 	
@@ -19,7 +20,7 @@ public class ConcreteDaoFactory extends DaoFactory{
 				concreteQuestionDAO = new ConcreteQuestionDAO(em);
 			return concreteQuestionDAO;
 		}
-		else if(type.equals("loginDAO")){
+		else if(type.equals("userDAO")){
 			if(concreteUserDAO==null)
 				concreteUserDAO = new ConcreteUserDAO(em);
 			return concreteUserDAO;
@@ -28,6 +29,11 @@ public class ConcreteDaoFactory extends DaoFactory{
 			if(concreteScoreDAO==null)
 				concreteScoreDAO = new ConcreteScoreDAO(em);
 			return concreteScoreDAO;
+		}
+		else if(type.equals("teamDAO")){
+			if(concreteTeamDAO==null)
+				concreteTeamDAO = new ConcreteTeamDAO(em);
+			return concreteTeamDAO;
 		}
 		return null;
 	}	

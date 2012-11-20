@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.security.sasl.AuthorizeCallback;
 
+import exceedvote.dao.ConcreteDaoFactory;
+import exceedvote.dao.ConcreteTeamDAO;
 import exceedvote.domain.Login;
 import exceedvote.domain.ScoreBoard;
 import exceedvote.domain.TeamBoard;
@@ -21,34 +23,39 @@ public class VoteController {
 	private ScoreBoard scoreBoard;
 	//add
 	private User user;
-	
+	 
 	//adjust the creating of voteChart to login method, after verification success.
 	/** Constructor **/
-	public VoteController(){
-		login = new Login();
-		teamBoard = new TeamBoard();
+	public VoteController(User user){
+//		login = new Login();
+//		teamBoard = new TeamBoard();
 		scoreBoard = ScoreBoard.getInstance();
-	}
-	/**
-	 * Method used to verify the authorization.
-	 * @param id as the Identification of voter.
-	 * @param password as the password of voter.
-	 * @return true, if the authorization of voter is available, false if not.
-	 */
-	public boolean login(String id, String password){
-		user = login.verify(id,password);
-		if(user==null)
-			return false;
-		//creating voteChart here.
+		this.user = user;
 		voteChart = new VoteChart(user.getId());
-		return true;
 	}
+//	/**
+//	 * Method used to verify the authorization.
+//	 * @param id as the Identification of voter.
+//	 * @param password as the password of voter.
+//	 * @return true, if the authorization of voter is available, false if not.
+//	 */
+//	public boolean login(String id, String password){
+//		user = login.verify(id,password);
+//		if(user==null)
+//			return false;
+//		//creating voteChart here.
+//		voteChart = new VoteChart(user.getId());
+//		return true;
+//	}
 	
 	/**
 	 * Method used to get the name of each team.
 	 * @return list of name of the whole teams.
 	 */
-	public List<String> getTeam(){	return teamBoard.getTeamName(); }
+	public List<String> getTeam(){//	return teamBoard.getTeamName(); }
+		ConcreteTeamDAO teamDAO = (ConcreteTeamDAO)ConcreteDaoFactory.getInstance().createDAO("teamDAO");
+		return teamDAO.getTeamName();
+	}
 	
 	/**
 	 * Method that return the list of string of the instruction of each question.
@@ -61,7 +68,7 @@ public class VoteController {
 	 * @param questionIndex as the index of question.
 	 * @return Type of question.
 	 */
-	public Class getQuestionType(int questionIndex){ return voteChart.getQuestionType(questionIndex); }
+	public String getQuestionType(int questionIndex){ return voteChart.getQuestionType(questionIndex); }
 	
 	/**
 	 * Method that return the list of integer of the old point of each question.

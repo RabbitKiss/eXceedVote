@@ -20,7 +20,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
+import exceedvote.controller.CommitteeController;
+import exceedvote.controller.LoginController;
 import exceedvote.controller.VoteController;
+import exceedvote.domain.User;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,7 +36,8 @@ public class LoginUI extends JFrame implements ActionListener{
 	private JTextField usernameTextField;
 	private JTextField passwordField;
 	private JPanel loginPanel;
-	private VoteController controller;
+	private LoginController controller;
+	//private User user;
 
 	/**
 	 * Launch the application.
@@ -55,7 +59,7 @@ public class LoginUI extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public LoginUI() {
-		controller = new VoteController();
+		controller = new LoginController();
 		setTitle("eXceedVote");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -141,13 +145,30 @@ public class LoginUI extends JFrame implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(controller.login( usernameTextField.getText(), passwordField.getText())){
-			VoteUI frame = new VoteUI(controller);
-			this.setVisible(false);
-			dispose();
+		 User user = controller.verify( usernameTextField.getText(), passwordField.getText());
+		 if(user==null)
+			JOptionPane.showMessageDialog(contentPane,"login failed");
+		 else if(user.getUserType().equals("student")){
+			VoteUI frame = new VoteUI(new VoteController(user));
+		  this.setVisible(false);
+		 	dispose();
 			frame.setVisible(true);
-		}
-		// add
+			}
+		 else if(user.getUserType().equals("committee")){
+			CommitteeUI frame = new CommitteeUI(new CommitteeController());
+			this.setVisible(false);
+		 	dispose();
+			frame.setVisible(true);
+			}
+//		if(controller.login( usernameTextField.getText(), passwordField.getText())){
+//			VoteUI frame = new VoteUI(controller);
+//			CommitteeUI frame = new CommitteeUI(new CommitteeController());
+//			this.setVisible(false);
+//			dispose();
+//			frame.setVisible(true);
+//			
+//		}
+//		// add
 		else{
 			JOptionPane.showMessageDialog(contentPane,"login failed");
 		}

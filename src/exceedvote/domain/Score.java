@@ -29,6 +29,12 @@ public class Score implements Serializable {
 
 	public Score() {
 	}
+	
+	public Score(int userId,int questionIndex,String point){
+		this.userId = userId;
+		this.questionIndex = questionIndex;
+		this.point = point;
+	}
 
 	public int getId() {
 		return this.id;
@@ -63,6 +69,8 @@ public class Score implements Serializable {
 	}
 
 	public List<Integer> getScorePoint(){
+		if(point==null)
+			return null;
 		String[] tmp = this.point.split(",");
 		List<Integer> score = new ArrayList<Integer>();
 		for(String s : tmp)

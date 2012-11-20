@@ -34,8 +34,6 @@ import java.awt.event.FocusListener;
 import javax.swing.JComboBox;
 
 import exceedvote.controller.VoteController;
-import exceedvote.domain.BallotType;
-import exceedvote.domain.ScoreType;
 /**
  * User Interface of voting process
  * 
@@ -74,9 +72,9 @@ public class VoteUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-
-		mainScrollPane = new JScrollPane();
+		JScrollPane mainScrollPane = new JScrollPane(contentPane);
+		mainScrollPane.setPreferredSize(new Dimension(550,400));
+		setContentPane(mainScrollPane);
 
 		panel = new JPanel();
 
@@ -84,7 +82,7 @@ public class VoteUI extends JFrame implements ActionListener {
 		btnSubmit.addActionListener(this);
 		panel.add(btnSubmit);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		contentPane.add(mainScrollPane);
+//		contentPane.add(mainScrollPane);
 		contentPane.add(panel, BorderLayout.EAST);
 
 		choicePanel = new JPanel();
@@ -96,7 +94,7 @@ public class VoteUI extends JFrame implements ActionListener {
 		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		choicePanel.setLayout(gbl_panel);
 
-		// for test only
+
 		List<String> question = controller.getInstruction();
 		List<String> team = controller.getTeam();
 
@@ -116,28 +114,32 @@ public class VoteUI extends JFrame implements ActionListener {
 		}
 
 		for (int i = 0; i < question.size(); i++) {
-			if ((controller.getQuestionType(i))== BallotType.class) {
+			if ((controller.getQuestionType(i)).equals("BallotType")) {
 				ButtonGroup group = new ButtonGroup();
 				List<JRadioButton> list = new ArrayList<JRadioButton>();
 				for (int j = 0; j < team.size(); j++) {
 					GridBagConstraints gbc = new GridBagConstraints();
+					List<Integer> choice = controller.getChoice(i);
 					gbc.gridy = i + 2;
 					gbc.gridx = j + 1;
 					JRadioButton jrb = new JRadioButton();
+					if(choice.get(j)==1) jrb.setSelected(true);
 					group.add(jrb);
 					list.add(jrb);
 					choicePanel.add(jrb, gbc);
 				}
 				ballotList.add(list);
-			} else if ((controller.getQuestionType(i))== ScoreType.class) {
+			} else if ((controller.getQuestionType(i)).equals("ScoreType")) {
 				List<JComboBox> list = new ArrayList<JComboBox>();
 				for (int j = 0; j < team.size(); j++) {
 					GridBagConstraints gbc = new GridBagConstraints();
+					List<Integer> choice = controller.getChoice(i);
 					gbc.gridy = i + 2;
 					gbc.gridx = j + 1;
 					String[] c = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
 							"10" };
 					JComboBox ans = new JComboBox(c);
+					ans.setSelectedIndex(choice.get(j)-1);
 					ans.setPreferredSize(new Dimension(45, 25));
 					list.add(ans);
 					choicePanel.add(ans, gbc);
@@ -158,7 +160,7 @@ public class VoteUI extends JFrame implements ActionListener {
 		List<String> team = controller.getTeam();
 		int a=0,b=0;
 		for (int i = 0; i < question.size(); i++) {
-			if ((controller.getQuestionType(i))== BallotType.class) {
+			if ((controller.getQuestionType(i)).equals("BallotType")) {
 				List<Integer> list = new ArrayList<Integer>();
 				List<JRadioButton> tmp = ballotList.get(b);
 				for (int j = 0; j<team.size(); j++) {
@@ -169,7 +171,7 @@ public class VoteUI extends JFrame implements ActionListener {
 //				System.out.println();
 				controller.vote(i, list);
 				b++;
-			} else if ((controller.getQuestionType(i))== ScoreType.class) {
+			} else if ((controller.getQuestionType(i)).equals("ScoreType")) {
 				List<Integer> list = new ArrayList<Integer>();
 				List<JComboBox> tmp = scoreList.get(a);
 				for (int j = 0; j<team.size(); j++) {

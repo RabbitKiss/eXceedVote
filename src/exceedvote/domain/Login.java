@@ -21,7 +21,7 @@ public class Login
      */
     public Login()
     {
-    		userDAO = (ConcreteUserDAO) DaoFactory.getInstance().createDAO("loginDAO");
+    		userDAO = (ConcreteUserDAO) DaoFactory.getInstance().createDAO("userDAO");
     }
 
     

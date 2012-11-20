@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
+import exceedvote.dao.ConcreteQuestionDAO;
+import exceedvote.dao.ConcreteScoreDAO;
+import exceedvote.dao.ConcreteTeamDAO;
+import exceedvote.dao.ConcreteUserDAO;
 import exceedvote.dao.DaoFactory;
 
 /**
@@ -14,8 +18,12 @@ public class ScoreBoard
 { 
 	private static Logger log = Logger.getLogger( ScoreBoard.class );
     private static ScoreBoard instance = null;
-    //add
     
+    //add
+    private ConcreteQuestionDAO questionDAO;
+    private ConcreteScoreDAO scoreDAO;
+//    private ConcreteTeamDAO teamDAO;
+//    private ConcreteUserDAO userDAO;
     
     /**
      *  
@@ -36,6 +44,10 @@ public class ScoreBoard
      */
     private ScoreBoard()
     {
+    	questionDAO = (ConcreteQuestionDAO) DaoFactory.getInstance().createDAO("questionDAO");
+    	scoreDAO = (ConcreteScoreDAO) DaoFactory.getInstance().createDAO("scoreDAO");
+//    	teamDAO = (ConcreteTeamDAO) DaoFactory.getInstance().createDAO("teamDAO");
+//    	userDAO = (ConcreteUserDAO) DaoFactory.getInstance().createDAO("userDAO");
     }
     
     /**
@@ -45,8 +57,9 @@ public class ScoreBoard
      */
     public List<Integer> getScore(int questionIndex)
     {
-        List<Integer> sc = new ArrayList<Integer>();
-        return sc;
+    	//TODO
+//        List<Integer> sc = scoreDAO.
+        return null;
     }
     
     
@@ -69,6 +82,13 @@ public class ScoreBoard
     //add
 //    public void update(int questionIndex,List<Integer> point){
 //    	DaoFactory.getInstance().createDAO("scoreDAO").update(o);
-//    }
+//    }    
     
+    public List<Score> getChoice(int userId){
+    	return scoreDAO.find(userId);
+    }
+    
+    public void vote(Score score){
+    	scoreDAO.update(score);
+    }
 }

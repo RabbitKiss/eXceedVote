@@ -17,7 +17,7 @@ public class ConcreteScoreDAO implements DAO{
 
 	@Override
 	public void save(Object o) {
-		// TODO Auto-generated method stub
+		//TODO
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist((Score)o);
@@ -26,29 +26,15 @@ public class ConcreteScoreDAO implements DAO{
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
-		Score score = (Score)o;
-		
-		String point = score.getPoint();
-		int userId = score.getUserId();
-		int questionIndex = score.getQuestionIndex();
-		System.out.println("user : "+userId+" question : "+questionIndex+" point : "+point);
-//		em.getTransaction().begin();
+		Score score = (Score)o;		
+//		System.out.println("user : "+userId+" question : "+questionIndex+" point : "+point);
 		Query query = em.createQuery("UPDATE Score s SET s.point = :point WHERE s.userId = :userId and s.questionIndex = :questionIndex");
-		query.setParameter("point", point);
-		query.setParameter("userId", userId);
-		query.setParameter("questionIndex", questionIndex);
+		query.setParameter("point", score.getPoint());
+		query.setParameter("userId", score.getUserId());
+		query.setParameter("questionIndex", score.getQuestionIndex());
 		em.getTransaction().begin();
-//		em.merge(score);
 		query.executeUpdate();
 		em.getTransaction().commit();
-		
-		
-		
-//	    em.getTransaction().begin();
-//	    Score sc = em.g
-//	    sc.setPoint(point);
-//	    em.getTransaction().commit();
 	}
 
 	@Override
@@ -56,18 +42,11 @@ public class ConcreteScoreDAO implements DAO{
 		// TODO Auto-generated method stub		
 	}
 
-	public List<Score> find(int id){//,int questionIndex){
+	public List<Score> find(int id){
 		
-		Query query = em.createQuery("SELECT s FROM Score s WHERE s.userId = :id");// and s.questionIndex = :questionIndex");
+		Query query = em.createQuery("SELECT s FROM Score s WHERE s.userId = :id");
 		query.setParameter("id", id);
 		List<Score> scores = query.getResultList();
-		for(Score s : scores){
-			List<Integer> tmp = s.getScorePoint();
-			for(int i : tmp)
-				System.out.print(i+" ");
-			System.out.println("");
-		}
 		return scores;		
-	}
-	
+	}	
 }
