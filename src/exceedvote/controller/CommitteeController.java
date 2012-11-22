@@ -93,7 +93,6 @@ public class CommitteeController {
 	}
 	
 	public void deleteUser(String userId){
-		User tmp;
 		int i;
 		for(i=0;i<users.size();i++)
 			if(users.get(i).getUserId().equals(userId))

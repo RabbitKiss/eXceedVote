@@ -423,7 +423,7 @@ public class CommitteeUI extends JFrame implements ActionListener {
 			else
 				type = "BallotType";
 			controller.addQuestion(addQuesUnstruText.getText(), type);
-
+			addQuesUnstruText.setText("");
 			JOptionPane.showMessageDialog(null, "Added!");
 
 		} else if (name.equals("quesSelectButton")) {
@@ -446,7 +446,7 @@ public class CommitteeUI extends JFrame implements ActionListener {
 			else
 				type = "BallotType";
 			controller.editQuestion(index, editQuesUnstruText.getText(), type);
-
+			editQuesUnstruText.setText("");
 			JOptionPane.showMessageDialog(null, "Edited!");
 
 		} else if (name.equals("deleteQuesButton")) {
@@ -458,6 +458,7 @@ public class CommitteeUI extends JFrame implements ActionListener {
 
 			controller.addTeam(addTeamNameText.getText(),
 					addTeamDescripText.getText());
+			addTeamNameText.setText("");
 			JOptionPane.showMessageDialog(null, "Added!");
 
 		} else if (name.equals("selectTeamButton")) {
@@ -494,14 +495,17 @@ public class CommitteeUI extends JFrame implements ActionListener {
 			if (pass1.equals(pass2)) {
 				controller.addUser(usernameText.getText(), pass1.toString(),
 						type);
+				usernameText.setText("");
 				JOptionPane.showMessageDialog(null, "Added!");
 			} else
 				JOptionPane.showMessageDialog(null, "Password not match!");
-
+			passwordField.setText("");
+			passwordField2.setText("");
 		} else if (name.equals("deleteUserButton")) {
 
 			controller.deleteUser(deleteUserText.getText());
 			JOptionPane.showMessageDialog(null, "Deleted!");
+			deleteUserText.setText("");
 
 		} else if (name.equals("startVoteButton")) {
 

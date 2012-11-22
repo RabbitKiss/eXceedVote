@@ -73,7 +73,7 @@ public class VoteUI extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		JScrollPane mainScrollPane = new JScrollPane(contentPane);
-		mainScrollPane.setPreferredSize(new Dimension(550,400));
+//		mainScrollPane.setPreferredSize(new Dimension(550,400));
 		setContentPane(mainScrollPane);
 
 		panel = new JPanel();
