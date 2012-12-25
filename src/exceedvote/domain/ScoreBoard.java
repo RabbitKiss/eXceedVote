@@ -20,10 +20,7 @@ public class ScoreBoard
     private static ScoreBoard instance = null;
     
     //add
-    private ConcreteQuestionDAO questionDAO;
     private ConcreteScoreDAO scoreDAO;
-//    private ConcreteTeamDAO teamDAO;
-//    private ConcreteUserDAO userDAO;
     
     /**
      *  
@@ -44,7 +41,6 @@ public class ScoreBoard
      */
     private ScoreBoard()
     {
-    	questionDAO = (ConcreteQuestionDAO) DaoFactory.getInstance().createDAO("questionDAO");
     	scoreDAO = (ConcreteScoreDAO) DaoFactory.getInstance().createDAO("scoreDAO");
 //    	teamDAO = (ConcreteTeamDAO) DaoFactory.getInstance().createDAO("teamDAO");
 //    	userDAO = (ConcreteUserDAO) DaoFactory.getInstance().createDAO("userDAO");

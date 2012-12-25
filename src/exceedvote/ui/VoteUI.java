@@ -34,11 +34,12 @@ import java.awt.event.FocusListener;
 import javax.swing.JComboBox;
 
 import exceedvote.controller.VoteController;
+
 /**
  * User Interface of voting process
  * 
  * @author Akarawit
- *
+ * 
  */
 public class VoteUI extends JFrame implements ActionListener {
 
@@ -62,7 +63,7 @@ public class VoteUI extends JFrame implements ActionListener {
 		this.pack();
 
 	}
-	
+
 	/**
 	 * initial UI component
 	 */
@@ -73,16 +74,24 @@ public class VoteUI extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		JScrollPane mainScrollPane = new JScrollPane(contentPane);
-//		mainScrollPane.setPreferredSize(new Dimension(550,400));
+		// mainScrollPane.setPreferredSize(new Dimension(550,400));
 		setContentPane(mainScrollPane);
 
 		panel = new JPanel();
 
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.setBounds(435, 523, 89, 23);
+		getContentPane().add(logoutButton);
+		logoutButton.addActionListener(this);
+		logoutButton.setName("Logout");
+		panel.add(logoutButton);
+
 		btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(this);
+		btnSubmit.setName("btnSubmit");
 		panel.add(btnSubmit);
 		contentPane.setLayout(new BorderLayout(0, 0));
-//		contentPane.add(mainScrollPane);
+		// contentPane.add(mainScrollPane);
 		contentPane.add(panel, BorderLayout.EAST);
 
 		choicePanel = new JPanel();
@@ -93,7 +102,6 @@ public class VoteUI extends JFrame implements ActionListener {
 		gbl_panel.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		choicePanel.setLayout(gbl_panel);
-
 
 		List<String> question = controller.getInstruction();
 		List<String> team = controller.getTeam();
@@ -123,7 +131,8 @@ public class VoteUI extends JFrame implements ActionListener {
 					gbc.gridy = i + 2;
 					gbc.gridx = j + 1;
 					JRadioButton jrb = new JRadioButton();
-					if(choice.get(j)==1) jrb.setSelected(true);
+					if (choice.get(j) == 1)
+						jrb.setSelected(true);
 					group.add(jrb);
 					list.add(jrb);
 					choicePanel.add(jrb, gbc);
@@ -139,7 +148,7 @@ public class VoteUI extends JFrame implements ActionListener {
 					String[] c = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
 							"10" };
 					JComboBox ans = new JComboBox(c);
-					ans.setSelectedIndex(choice.get(j)-1);
+					ans.setSelectedIndex(choice.get(j) - 1);
 					ans.setPreferredSize(new Dimension(45, 25));
 					list.add(ans);
 					choicePanel.add(ans, gbc);
@@ -150,41 +159,55 @@ public class VoteUI extends JFrame implements ActionListener {
 		}
 
 	}
-	
+
 	/**
 	 * actionPerformed for submit button
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		List<String> question = controller.getInstruction();
-		List<String> team = controller.getTeam();
-		int a=0,b=0;
-		for (int i = 0; i < question.size(); i++) {
-			if ((controller.getQuestionType(i)).equals("BallotType")) {
-				List<Integer> list = new ArrayList<Integer>();
-				List<JRadioButton> tmp = ballotList.get(b);
-				for (int j = 0; j<team.size(); j++) {
-					if(tmp.get(j).isSelected()) list.add(1);
-					else list.add(0);
-//					System.out.print(list.get(j));
-				}
-//				System.out.println();
-				controller.vote(i, list);
-				b++;
-			} else if ((controller.getQuestionType(i)).equals("ScoreType")) {
-				List<Integer> list = new ArrayList<Integer>();
-				List<JComboBox> tmp = scoreList.get(a);
-				for (int j = 0; j<team.size(); j++) {
-					 list.add(tmp.get(j).getSelectedIndex()+1);
-//					 System.out.print(list.get(j));
-				}
-//				System.out.println();
-				controller.vote(i, list);
-				a++;
-			}
-		}
 
-		JOptionPane.showMessageDialog(null, "Record Complete!");
+		String name = ((JButton) arg0.getSource()).getName();
+		if (name.equals("btnSubmit")) {
+			List<String> question = controller.getInstruction();
+			List<String> team = controller.getTeam();
+			int a = 0, b = 0;
+			for (int i = 0; i < question.size(); i++) {
+				if ((controller.getQuestionType(i)).equals("BallotType")) {
+					List<Integer> list = new ArrayList<Integer>();
+					List<JRadioButton> tmp = ballotList.get(b);
+					for (int j = 0; j < team.size(); j++) {
+						if (tmp.get(j).isSelected())
+							list.add(1);
+						else
+							list.add(0);
+						// System.out.print(list.get(j));
+					}
+					// System.out.println();
+					controller.vote(i, list);
+					b++;
+				} else if ((controller.getQuestionType(i)).equals("ScoreType")) {
+					List<Integer> list = new ArrayList<Integer>();
+					List<JComboBox> tmp = scoreList.get(a);
+					for (int j = 0; j < team.size(); j++) {
+						list.add(tmp.get(j).getSelectedIndex() + 1);
+						// System.out.print(list.get(j));
+					}
+					// System.out.println();
+					controller.vote(i, list);
+					a++;
+				}
+			}
+
+			JOptionPane.showMessageDialog(null, "Record Complete!");
+		} else{
+			
+			JOptionPane.showMessageDialog(null, "Logged out!");
+			this.dispose();
+			LoginUI frame = new LoginUI();
+			frame.setVisible(true);
+			
+		}
+			
 
 	}
 

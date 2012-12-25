@@ -92,6 +92,10 @@ public class CommitteeController {
 		users = userDAO.findAll();
 	}
 	
+	public List<User> getUsers() {
+		return users;
+	}
+	
 	public void deleteUser(String userId){
 		int i;
 		for(i=0;i<users.size();i++)
@@ -121,5 +125,15 @@ public class CommitteeController {
 		for(TeamBoard t : teamBoards)
 			descriptions.add(t.getDescription());
 		return descriptions;
+	}
+
+	public String[] getUsersName() {
+		String[] arr = new String[users.size()];
+		int i=0;
+		for(User user:users){
+			arr[i]=user.getUserId();
+			i++;
+		}
+		return arr;
 	}
 }
