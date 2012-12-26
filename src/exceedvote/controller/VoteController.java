@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.security.sasl.AuthorizeCallback;
 
+import org.apache.log4j.Logger;
+
 import exceedvote.dao.ConcreteDaoFactory;
 import exceedvote.dao.ConcreteTeamDAO;
 import exceedvote.domain.Login;
@@ -11,6 +13,7 @@ import exceedvote.domain.ScoreBoard;
 import exceedvote.domain.TeamBoard;
 import exceedvote.domain.User;
 import exceedvote.domain.VoteChart;
+import exceedvote.ui.VoteUI;
 /**
  * This class is used to be like a medium between logical part and representative part.
  * @author Jaktip Yordsri
@@ -21,6 +24,7 @@ public class VoteController {
 	private TeamBoard teamBoard;
 	private Login login;
 	private ScoreBoard scoreBoard;
+	private static Logger log = Logger.getLogger( VoteController.class );
 	//add
 	private User user;
 	 
@@ -82,6 +86,9 @@ public class VoteController {
 	 * @param questionIndex as the index of question.
 	 * @param point as the list of point of this question.
 	 */
-	public void vote(int questionIndex, List<Integer> point){ voteChart.vote(questionIndex,point); }
+	public void vote(int questionIndex, List<Integer> point){ 
+		log.info("ID:"+user.getId()+" Has voted! ");
+		voteChart.vote(questionIndex,point); 
+		}
 	
 }

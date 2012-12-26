@@ -1,0 +1,55 @@
+Manual for RabbitKiss's Exceedvote
+
+----- Introduce -----
+
+First thing when you run JARS file(s), you will see 2 text boxes.
+First text box(upper box) that is the ID field and second one is for Password field
+,after your input ID and password are correct then press "ENTER" key or click "Login" button.
+The program will take you to next console up to your ID level.
+
+----- Common User -----
+
+Common User is votable user who can be created by committee. 
+1.Vote
+	- After you log in with common user, you will see that the left hand side is question and top of row is team's name.
+	  Beneath the team's name is area of your vote score that is divined in two types, Score type
+	  in combo box interface which you can give score 1 - 10 for every team and Ballot type in radio button interface which
+	  you can choose only one team for one question.
+	  After finishing the vote you must click "submit" button to send your vote score. 
+
+2.Revote 
+	- You can login to edit the vote as much as you want; the program will save your last vote.
+
+
+----- Committee User -----
+
+Committee User is admin user that can adjust or control everything in this program(except some database).
+1.Create ID
+	- To create ID after you login with committee ID let's select "User" tab 
+	  then input ID,Password and select level to create account.
+2.Delete ID
+	- Select "User" tab nthen select ID that you want to delete.
+3.Create Question
+	- Select "Questions" tab ,then input your question in "Instrction" text box; select type of question ,then click on "Add question" button.
+4.Edit Question
+	- Select "Questions" tab ,then select question you want to edit and input edited text in <second>"Instrction" text box; select type of questions then click on "Edit question" button. 
+5.Delete Question
+	- Select "Questions" tab ,then select question you want to delete and click on "Delete" button.
+6.Add Team
+	- Select "Teams" tab ,then input team name and team description(optional) and click on "Add Team" button.
+7.Edit Team
+	- Select "Teams" tab ,then select team you want to edit ,then input edit team name ,then team description and click on "Edit Team" button.
+8.Delete Team
+	- Select "Teams" tab ,then select team you want to delete and click on "Delete" button.
+9.Start vote
+	- Select "Open Vote" tab click on "Start vote" button.
+
+	Ps.You must click on start button only one time, when you start the vote; program will create the score database for each voter.
+	PsII.Everytime you start vote database, it will create score of user inside the score table that make program nerve.
+	PsIII.To reset vote you can delete data from database directly(in user table).
+10.Stop vote
+	- Select "Open Vote" tab click on "Stop vote" button.When you stop vote; all vote after that will be not include in summation score.  
+	//Not implement it yet. 
+11.Compute Score
+	- Select "Score" tab program will show cerrent rank and score.
+	//Not implement it yet
